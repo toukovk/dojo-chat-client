@@ -11,7 +11,7 @@
     <h2>Todo</h2>
     <div ng-controller="ChatCtrl">
       <ul class="unstyled">
-        <message ng-repeat="msg in messages" />
+        <message ng-repeat="msg in data.messages" />
       </ul>
       <form ng-submit="addMessage()">
         <input type="text" ng-model="todoText"  size="30"
@@ -21,30 +21,3 @@
     </div>
   </body>
 </html>
-
-<script>
-  // var chat = new ChatConnector("http://192.168.102.66:8080");
-  
-  // chat.handleAllRooms(function (rooms){
-  // 	console.log("all the rooms");
-  // 	console.log(rooms);
-  // });
-
-  // chat.handleJoinedRooms(function (rooms){
-  //   console.log("joined rooms");
-  //   console.log(rooms);
-  // });
-
-  // chat.handleUsersInRoom(function (roomUsers){
-  //   console.log("users in room");
-  // 	console.log(roomUsers);
-  // });
-  // chat.handleReceiveMessage(function (message){
-  // 	console.log("received message");
-  // 	console.log(message);
-  // });
-
-  // var username=prompt("Please enter your name:");
-  // chat.login(username);
-
-</script>
