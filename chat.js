@@ -2,6 +2,8 @@ angular.module('dojo-chat', [])
   .service('ChatService', [
     function() {
       var messages = [];
+      var username = 'Touko';
+      var currentRoom = 'dojo';
       var backendCallback;
 
       function apply() {
@@ -33,18 +35,18 @@ angular.module('dojo-chat', [])
         console.log(message);
       });
 
-      var username = 'Touko';
       chat.login(username);
-      chat.joinRoom('dojo');
+      chat.joinRoom(currentRoom);
       window.chat = chat;
 
       function addMessage(text) {
-        var message = {
-          message: text,
-          timestamp: new Date().getTime(),
-          sender: username
-        }
-        messages.push(message);
+        // var message = {
+        //   message: text,
+        //   timestamp: new Date().getTime(),
+        //   sender: username
+        // }
+        chat.sendMessage(currentRoom, text);
+        // messages.push(message);
       }
       function setBackendCallback(callback) {
         backendCallback = callback;
