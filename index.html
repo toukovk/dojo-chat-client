@@ -16,7 +16,7 @@
       </ul>
       <hr/>
       <form ng-submit="addMessage()">
-        <div>{{data.username}}:</div>
+        <div>{{data.username}}/{{data.currentRoom}}</div>
         <input type="text" ng-model="todoText"  size="30"
                placeholder="Enter your message">
         <input class="btn-primary" type="submit" value="Send">
