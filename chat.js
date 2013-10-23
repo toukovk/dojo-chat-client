@@ -81,6 +81,13 @@ angular.module('dojo-chat', [])
       template: '<li><span>{{msg.formattedTimestamp}} {{msg.sender}}: {{msg.message}}</span></li>'
     };
   })
+  .directive('room', function() {
+    return {
+      restrict: 'E',
+      transclude: true,
+      template: '<li>{{room.name}}</li>'
+    };
+  })
   // <span>{{message.text}}</span>
   .controller('ChatCtrl', ['$scope', 'ChatService',
     function($scope, ChatService) {
