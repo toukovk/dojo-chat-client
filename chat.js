@@ -1,12 +1,29 @@
-angular.module('dojo-chat', []).
-  controller('ChatCtrl', ['$scope',
-    function($scope) {
-      $scope.todos = [
+angular.module('dojo-chat', [])
+  .service('ChatService', [
+    function() {
+      var todos = [
         {text:'learn angular', done:true},
-        {text:'build an angular app', done:false}];
+        {text:'build an angular app', done:false}
+      ];
+
+      function getTodos() {
+        return todos;
+      }
+
+      function addTodo(text) {
+        todos.push({text:text, done:false});
+      }
+      return {
+        getTodos: getTodos,
+        addTodo: addTodo
+      }
+  }])
+  .controller('ChatCtrl', ['$scope', 'ChatService',
+    function($scope, ChatService) {
+      $scope.todos = ChatService.getTodos();
      
       $scope.addTodo = function() {
-        $scope.todos.push({text:$scope.todoText, done:false});
+        ChatService.addTodo($scope.todoText);
         $scope.todoText = '';
       };
      
