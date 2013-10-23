@@ -4,6 +4,11 @@ var Room = function(chat, name) {
   this.users = [];  
   this.join = function() {
     chat.joinRoom(this.name);
+    this.joined = true;
+  }
+
+  this.getJoinPresentation = function() {
+    return this.joined ? "X" : "";
   }
 };
 
@@ -33,6 +38,8 @@ angular.module('dojo-chat', [])
           _.forEach(roomNamesFromBackend, function(roomName) {
             rooms.push(new Room(chat, roomName));
           });
+          data.currentRoom = rooms[0].name;
+          rooms[0].join();
         }
         apply();
         console.log("all the rooms");
@@ -49,7 +56,8 @@ angular.module('dojo-chat', [])
         console.log(roomUsers);
       });
       chat.handleReceiveMessage(function (message){
-        message.formattedTimestamp = new XDate(message.timestamp).toString("d.MM.yyyy HH:MM");
+        console.log('got message', message);
+        message.formattedTimestamp = new XDate(message.timestamp).toString("d.MM.yyyy HH:mm");
         messages.push(message);
         apply();
         console.log("received message");
@@ -57,7 +65,6 @@ angular.module('dojo-chat', [])
       });
 
       chat.login(data.username);
-      chat.joinRoom(data.currentRoom);
       window.chat = chat;
 
       function addMessage(text) {
@@ -85,7 +92,7 @@ angular.module('dojo-chat', [])
     return {
       restrict: 'E',
       transclude: true,
-      template: '<li>{{room.name}}</li>'
+      template: '<li>[{{room.getJoinPresentation()}}] {{room.name}}</li>'
     };
   })
   // <span>{{message.text}}</span>
