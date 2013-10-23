@@ -84,14 +84,14 @@ angular.module('dojo-chat', [])
     return {
       restrict: 'E',
       transclude: true,
-      template: '<li><span>{{msg.timestamp | date:"yyyy-MM-dd HH:mm:ss"}}: {{msg.sender}}: {{msg.message}}</span></li>'
+      template: '<li><span>#{{msg.room}} {{msg.timestamp | date:"yyyy-MM-dd HH:mm:ss"}}: {{msg.sender}}: {{msg.message}}</span></li>'
     };
   })
   .directive('room', function() {
     return {
       restrict: 'E',
       transclude: true,
-      template: '<li>[{{room.getJoinPresentation()}}] {{room.name}}</li>'
+      template: '<li>[{{room.getJoinPresentation()}}] #{{room.name}}</li>'
     };
   })
   // <span>{{message.text}}</span>
