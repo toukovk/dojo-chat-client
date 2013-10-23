@@ -7,6 +7,12 @@ var Room = function(chat, name) {
     this.joined = true;
   }
 
+  this.clicked = function() {
+    if(!this.joined) {
+      this.join();
+    }
+  }
+
   this.getJoinPresentation = function() {
     return this.joined ? "X" : "";
   }
@@ -38,8 +44,6 @@ angular.module('dojo-chat', [])
           _.forEach(roomNamesFromBackend, function(roomName) {
             rooms.push(new Room(chat, roomName));
           });
-          data.currentRoom = rooms[0].name;
-          rooms[0].join();
         }
         apply();
         console.log("all the rooms");
@@ -91,7 +95,7 @@ angular.module('dojo-chat', [])
     return {
       restrict: 'E',
       transclude: true,
-      template: '<li>[{{room.getJoinPresentation()}}] #{{room.name}}</li>'
+      template: '<li ng-click="roomClicked(room)">[{{room.getJoinPresentation()}}] #{{room.name}}</li>'
     };
   })
   // <span>{{message.text}}</span>
@@ -103,6 +107,10 @@ angular.module('dojo-chat', [])
       $scope.messages = ChatService.messages;
       $scope.rooms = ChatService.rooms;
       $scope.data = ChatService.data;
+
+      $scope.roomClicked = function(room) {
+        room.join();
+      }
      
       $scope.addMessage = function() {
         ChatService.addMessage($scope.todoText);
