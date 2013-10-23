@@ -18,6 +18,14 @@ angular.module('dojo-chat', [])
         addMessage: addMessage
       }
   }])
+  .directive('message', function() {
+    return {
+      restrict: 'E',
+      transclude: true,
+      template: '<li><span>{{msg.text}}</span></li>'
+    };
+  })
+  // <span>{{message.text}}</span>
   .controller('ChatCtrl', ['$scope', 'ChatService',
     function($scope, ChatService) {
       $scope.messages = ChatService.getMessages();
