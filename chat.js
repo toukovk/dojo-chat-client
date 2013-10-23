@@ -94,14 +94,14 @@ angular.module('dojo-chat', [])
   .directive('message', function() {
     return {
       restrict: 'E',
-      transclude: true,
+      replace: true,
       template: '<li><span>#{{msg.room}} {{msg.timestamp | date:"yyyy-MM-dd HH:mm:ss"}}: {{msg.sender}}: {{msg.message}}</span></li>'
     };
   })
   .directive('room', function() {
     return {
       restrict: 'E',
-      transclude: true,
+      replace: true,
       template: '<li class="{{room.name}}" ng-click="roomClicked(room)">[{{room.getJoinPresentation()}}] #{{room.name}}</li>'
     };
   })
