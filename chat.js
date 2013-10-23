@@ -57,7 +57,6 @@ angular.module('dojo-chat', [])
       });
       chat.handleReceiveMessage(function (message){
         console.log('got message', message);
-        message.formattedTimestamp = new XDate(message.timestamp).toString("d.MM.yyyy HH:mm");
         messages.push(message);
         apply();
         console.log("received message");
@@ -85,7 +84,7 @@ angular.module('dojo-chat', [])
     return {
       restrict: 'E',
       transclude: true,
-      template: '<li><span>{{msg.formattedTimestamp}} {{msg.sender}}: {{msg.message}}</span></li>'
+      template: '<li><span>{{msg.timestamp | date:"yyyy-MM-dd HH:mm:ss"}}: {{msg.sender}}: {{msg.message}}</span></li>'
     };
   })
   .directive('room', function() {
