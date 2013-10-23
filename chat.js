@@ -102,7 +102,7 @@ angular.module('dojo-chat', [])
     return {
       restrict: 'E',
       transclude: true,
-      template: '<li ng-click="roomClicked(room)">[{{room.getJoinPresentation()}}] #{{room.name}}</li>'
+      template: '<li class="{{room.name}}" ng-click="roomClicked(room)">[{{room.getJoinPresentation()}}] #{{room.name}}</li>'
     };
   })
   // <span>{{message.text}}</span>
