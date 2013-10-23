@@ -1,12 +1,7 @@
 angular.module('dojo-chat', [])
   .service('ChatService', [
     function() {
-      var data = {
-        messages: [
-          {sender: 'XYZ', timestamp: 1382541399510, message:'learn angular'},
-          {sender: 'XYZ', timestamp: 1382541399510, message:'build an angular app'}
-        ]
-      };
+      var messages = [];
       var backendCallback;
 
       function apply() {
@@ -32,7 +27,7 @@ angular.module('dojo-chat', [])
         console.log(roomUsers);
       });
       chat.handleReceiveMessage(function (message){
-        data.messages.push(message);
+        messages.push(message);
         apply();
         console.log("received message");
         console.log(message);
@@ -49,13 +44,13 @@ angular.module('dojo-chat', [])
           timestamp: new Date().getTime(),
           sender: username
         }
-        data.messages.push(message);
+        messages.push(message);
       }
       function setBackendCallback(callback) {
         backendCallback = callback;
       }
       return {
-        data: data,
+        messages: messages,
         addMessage: addMessage,
         setBackendCallback: setBackendCallback
       }
@@ -64,7 +59,7 @@ angular.module('dojo-chat', [])
     return {
       restrict: 'E',
       transclude: true,
-      template: '<li><span>{{msg.message}}</span></li>'
+      template: '<li><span>{{msg.sender}}: {{msg.message}}</span></li>'
     };
   })
   // <span>{{message.text}}</span>
@@ -73,7 +68,7 @@ angular.module('dojo-chat', [])
       ChatService.setBackendCallback(function() {
         $scope.$apply();
       });
-      $scope.data = ChatService.data;
+      $scope.messages = ChatService.messages;
      
       $scope.addMessage = function() {
         ChatService.addMessage($scope.todoText);
