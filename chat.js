@@ -1,3 +1,12 @@
+var Room = function(chat, name) {
+  this.joined = false;
+  this.name = name;
+  this.users = [];  
+  this.join = function() {
+    chat.joinRoom(this.name);
+  }
+};
+
 angular.module('dojo-chat', [])
   .service('ChatService', [
     function() {
@@ -6,6 +15,7 @@ angular.module('dojo-chat', [])
         currentRoom: 'dojo'
       }
       var messages = [];
+      var rooms = [];
       var backendCallback;
 
       function apply() {
@@ -16,7 +26,15 @@ angular.module('dojo-chat', [])
 
       var chat = new ChatConnector("http://192.168.102.66:8080");
       
-      chat.handleAllRooms(function (rooms){
+      chat.handleAllRooms(function (roomNamesFromBackend){
+        console.log('handleAllRooms', roomNamesFromBackend);
+        if(rooms.length == 0) {
+          console.log('First handleAllRooms -> foreach');
+          _.forEach(roomNamesFromBackend, function(roomName) {
+            rooms.push(new Room(chat, roomName));
+          });
+        }
+        apply();
         console.log("all the rooms");
         console.log(rooms);
       });
@@ -50,6 +68,7 @@ angular.module('dojo-chat', [])
       }
       return {
         messages: messages,
+        rooms: rooms,
         addMessage: addMessage,
         setBackendCallback: setBackendCallback,
         data: data
@@ -69,6 +88,7 @@ angular.module('dojo-chat', [])
         $scope.$apply();
       });
       $scope.messages = ChatService.messages;
+      $scope.rooms = ChatService.rooms;
       $scope.data = ChatService.data;
      
       $scope.addMessage = function() {

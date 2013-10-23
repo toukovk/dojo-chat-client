@@ -5,6 +5,7 @@
     <script src="chatConnector.js"></script>
     <script src="lib/xdate.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.8/angular.min.js"></script>
+    <script src="lib/underscore-min.js"></script>
     <script src="chat.js"></script>
 <!--    <link rel="stylesheet" href="todo.css">-->
   </head>
@@ -21,6 +22,10 @@
                placeholder="Enter your message">
         <input class="btn-primary" type="submit" value="Send">
       </form>
+      <ul>
+        <li ng-repeat="room in rooms">{{room.name}}</li>
+      </ul>
+      N of rooms: {{rooms.length}}
     </div>
   </body>
 </html>
