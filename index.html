@@ -1,5 +1,5 @@
 <!doctype html>
-<html ng-app>
+<html ng-app="dojo-chat">
   <head>
     <script src="http://192.168.102.66:8080/socket.io/socket.io.js"></script>
     <script src="chatConnector.js"></script>
@@ -9,7 +9,7 @@
   </head>
   <body>
     <h2>Todo</h2>
-    <div ng-controller="TodoCtrl">
+    <div ng-controller="ChatCtrl">
       <span>{{remaining()}} of {{todos.length}} remaining</span>
       [ <a href="" ng-click="archive()">archive</a> ]
       <ul class="unstyled">
