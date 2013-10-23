@@ -2,8 +2,8 @@ angular.module('dojo-chat', [])
   .service('ChatService', [
     function() {
       var messages = [
-        {text:'learn angular', done:true},
-        {text:'build an angular app', done:false}
+        {text:'learn angular'},
+        {text:'build an angular app'}
       ];
 
       function getMessages() {
@@ -11,7 +11,7 @@ angular.module('dojo-chat', [])
       }
 
       function addMessage(text) {
-        messages.push({text:text, done:false});
+        messages.push({text:text});
       }
       return {
         getMessages: getMessages,

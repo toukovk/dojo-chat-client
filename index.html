@@ -12,8 +12,7 @@
     <div ng-controller="ChatCtrl">
       <ul class="unstyled">
         <li ng-repeat="message in messages">
-          <input type="checkbox" ng-model="message.done">
-          <span class="done-{{todo.done}}">{{message.text}}</span>
+          <span>{{message.text}}</span>
         </li>
       </ul>
       <form ng-submit="addMessage()">
